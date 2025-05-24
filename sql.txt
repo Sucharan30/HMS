@@ -1,0 +1,99 @@
+CREATE TABLE patients (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    age INT,
+    gender VARCHAR(10),
+    dob DATE,
+    address VARCHAR(255),
+    phone VARCHAR(15),
+    email VARCHAR(100),
+    password VARCHAR(100)  -- added password field
+);
+
+
+
+CREATE TABLE appointments (
+    appointment_id INT AUTO_INCREMENT PRIMARY KEY,
+    patient_id INT,
+    doctor_id INT,
+    appointment_date DATE,
+    appointment_time TIME,
+    appointment_reason VARCHAR(255),
+    medical_history TEXT,
+    status VARCHAR(20),
+    cancellation_reason VARCHAR(255) DEFAULT NULL,
+    FOREIGN KEY (patient_id) REFERENCES patients(id),
+    FOREIGN KEY (doctor_id) REFERENCES doctors(id)
+);
+
+
+
+
+CREATE TABLE doctors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    specialization VARCHAR(100),
+    phone VARCHAR(15),
+    email VARCHAR(100)
+    password VARCHAR(100),
+    years of experience INT,
+); 
+
+
+
+CREATE TABLE Treatment (
+    Treatment_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    patient_ID INTEGER,
+    doctor_ID INTEGER,
+    Diagnosis TEXT,
+    Treatment_Plan TEXT,
+    Treatment_Cost REAL,
+    Start_Date TEXT,
+    End_Date TEXT,
+    FOREIGN KEY (patient_ID) REFERENCES patients(id),
+    FOREIGN KEY (doctor_ID) REFERENCES doctors(id)
+    FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id);
+
+);
+
+ CREATE TABLE Room (
+    RoomID INTEGER PRIMARY KEY AUTOINCREMENT,
+    RoomType TEXT,
+    AvailabilityStatus TEXT,
+    Cost REAL
+)
+
+CREATE TABLE Admin(
+name  varchar(100)
+password varchar(100)
+)
+
+CREATE TABLE nurses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    shift VARCHAR(20),
+    phone VARCHAR(15),
+    email VARCHAR(100),
+    password VARCHAR(100),
+    department VARCHAR(50),
+    time_slot VARCHAR(20)
+);
+
+
+CREATE TABLE Other_staff (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    role VARCHAR(50),
+    department VARCHAR(50),
+    phone VARCHAR(15),
+    email VARCHAR(100),
+    password VARCHAR(100)
+);
+
+CREATE TABLE Bill (
+    BillID INTEGER PRIMARY KEY AUTOINCREMENT,
+    PatientID INTEGER,
+    Amount REAL,
+    Date TEXT,
+    PaymentStatus TEXT,
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID)
